@@ -3,9 +3,10 @@ import './App.css'
 import shuffle from 'lodash.shuffle'
 import Card from './Card'
 import GuessCount from './GuessCount'
-import HallOfFame, { FAKE_HOF } from './HallOfFame.js'
+import HallOfFame from './HallOfFame.js'
+import HighScoreInput from './HighScoreInput'
 
-const SIDE = 6
+const SIDE = 2
 const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿'
 
 class App extends Component {
@@ -14,7 +15,12 @@ class App extends Component {
     cards: this.generateCards(),
     currentPair: [],
     guesses: 0,
+    hallOfFame: null,
     matchedCardIndices: [],
+  }
+
+  displayHallOfFame = (hallOfFame) => {
+    this.setState({ hallOfFame })
   }
 
   generateCards() {
@@ -70,13 +76,15 @@ class App extends Component {
   
     return indexMatched ? 'visible' : 'hidden'
   }
-
+  componentWillMount(){
+  
+  }
   render() {
-    const { cards, guesses, matchedCardIndices } = this.state
+    const { cards, guesses,hallOfFame, matchedCardIndices } = this.state
     const won = matchedCardIndices.length === cards.length
 
     return (
-      <div className="memory">
+      <div className="memory" id="test">
         <GuessCount guesses={guesses} />
         {
           cards.map((card, index) => (
@@ -89,7 +97,11 @@ class App extends Component {
             />
           ))
         }
-        {won && <HallOfFame entries={FAKE_HOF} />}
+{won && (hallOfFame ? (
+  <HallOfFame entries={hallOfFame} />
+) : (
+  <HighScoreInput guesses={guesses} onStored={this.displayHallOfFame} />
+))}
       </div>
   
     )
