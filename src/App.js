@@ -6,7 +6,7 @@ import GuessCount from './GuessCount'
 import HallOfFame from './HallOfFame.js'
 import HighScoreInput from './HighScoreInput'
 
-const SIDE = 2
+const SIDE = 6
 const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿'
 
 class App extends Component {
@@ -102,6 +102,8 @@ class App extends Component {
 ) : (
   <HighScoreInput guesses={guesses} onStored={this.displayHallOfFame} />
 ))}
+
+{won && "coucou"}
       </div>
   
     )

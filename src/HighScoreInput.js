@@ -9,9 +9,13 @@ import { saveHOFEntry } from './HallOfFame'
 class HighScoreInput extends Component {
   state = {winner: ''}
 
-  handleWinnerUpdate = (event) => {
+  handleWinnerUpdate = (event)=> {
     this.setState({ winner: event.target.value.toUpperCase() })
   }
+
+componentDidMount() {
+console.log ("coucou")
+}
 
   persistWinner = (event) => {
     event.preventDefault()
